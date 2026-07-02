@@ -1,0 +1,26 @@
+.camera{
+    position: absolute;
+    left: 45%;
+    bottom: 65%;
+    width: 7%;
+    height: 7%;
+    font-size: clamp(16px, 1.2vw, 30px);
+
+}
+
+.camera:hover {
+    transform: scale(1.1);
+}
+
+.upload {
+    position: absolute;
+    left: 45%;
+    bottom: 45%;
+    width: 7%;
+    height: 10%;
+    font-size: clamp(16px, 1.2vw, 30px);
+}
+
+.upload:hover {
+    transform: scale(1.1);
+}

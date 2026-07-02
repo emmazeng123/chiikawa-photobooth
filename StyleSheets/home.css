@@ -7,8 +7,15 @@ html, body {
 }
 
 body {
-    background-color: #f8eaef;
+  background: repeating-linear-gradient(
+    90deg,
+    #f8eaef 0px,
+    #f8eaef 20px,
+    white 20px,
+    white 40px
+)
 }
+
 
 .booth {
     width: 500px;
@@ -38,7 +45,7 @@ body {
 }
 
 .start:hover ~ .sparkle{
-    animation: sparkle-animation 2s ease-in-out infinite;
+    animation: sparkle-animation .5s ease-in-out infinite;
 }
 
 @font-face {
@@ -55,10 +62,10 @@ body {
 
 
 .sparkle {
-    width: 420px;
+    width: 30%;
     position: absolute;
-    left: 400px;
-    top: 72px;
+    left: 26%;
+    top: 10%;
 }
 
 @keyframes sparkle-animation {
@@ -69,7 +76,7 @@ body {
 
 .title {
   position: absolute;
-  top: 30px;
+  top: 3%;
   left: 48%;
   transform: translateX(-50%);
   font-family: "starfont";
@@ -80,7 +87,7 @@ body {
 
 .title span {
   display: inline-block;
-  animation: sparkle-animation 3s ease-in-out infinite;
+  animation: sparkle-animation 1.4s ease-in-out infinite;
   animation-delay: var(--delay);
 }
 
@@ -92,3 +99,24 @@ body {
 .title span:nth-child(6) { --delay: -1.1s; }
 .title span:nth-child(7) { --delay: -0.9s; }
 .title span:nth-child(8) { --delay: -1.5s; }
+
+
+.geekd{
+    position: absolute;
+    left: 60%;
+    bottom: 50%  
+}
+
+.start:hover ~ .geekd {
+    display:none;
+}
+
+.lockedin{
+    display:none;
+    position: absolute;
+    left: 60%;
+    bottom: 50%  
+}
+.start:hover ~ .lockedin {
+    display:block;
+}
