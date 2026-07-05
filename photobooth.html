@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="StyleSheets/photobooth.css"/>
-    </head>
+<head>
+    <title>chiikawa photobooth</title>
+    <link rel="icon" href="Assets/favicon.jpg">
+    <link rel="stylesheet" href="StyleSheets/photobooth.css">
+</head>
+<body>
+    <div class="page"></div>
 
-    <body>
-        <img class="sample" src="Assets/sample.png">
+    <div class="frame">
+        <video id="camera" autoplay playsinline></video>
+        <canvas id="snapshot" hidden></canvas>
+    </div>
 
-        <div class="camera-frame">
-            <video id="camera" autoplay playsinline></video>
-        </div>
+    <button id="ready">ready</button>
+    <div id="countdown"></div>
 
-        <input type="file" id="fileInput" accept="image/*" hidden>
-        <img id="userPhoto" alt="Uploaded Photo">
+    <img class="sample" src="Assets/sample.png">
 
-        <script src="JavaScript/photobooth.js"></script>
-    </body>
+    <script src="JavaScript/photobooth.js"></script>
+</body>
 </html>

@@ -1,3 +1,4 @@
+/* camera button */ 
 .camera{
     position: absolute;
     left: 45%;
@@ -12,6 +13,7 @@
     transform: scale(1.1);
 }
 
+/* upload button */
 .upload {
     position: absolute;
     left: 45%;
