@@ -24,30 +24,66 @@ body {
     left: 25%;
     z-index: 3;
 }
+ 
 
-.frame {
+.frame{
     position: absolute;
     left: 35%;
     bottom: 48%;
     width: 20%;
-    height: 48%;
+    height: 46%;
     overflow: hidden;
     z-index: 2;
 }
 
-#camera {
+#camera, #snapshot{
     transform: scaleX(-1);
-    width: 120%;
-    height: 120%;
+    width: 110%;
+    height: 110%;
     object-fit: cover;
     position: relative;
     left: -5%;
     top: 5%;
+    z-index: 1
 }
 
-#ready{
-    position: relative;
+#snapshot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+#ready {
+    position: absolute;
     left: 43%;
-    bottom: -92%;
-    z-index: 4;
+    top: 95%;  /* fixed position from top instead of relative bottom */
+    z-index: 5;  /* increase z-index to ensure it stays on top */
+}
+
+#photo1 {
+  position: relative;
+  width: 20%;
+  height: 30%;
+  left: 35%;
+  bottom: -49px;
+  display: block;
+
+}
+
+#photo2 {
+  position: relative;
+  width: 20%;
+  height: 30%;
+  left: 35%;
+  top: 5px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  z-index: 1;
+}
+
+#photo-frame1{
+  position: absolute;
+
 }
