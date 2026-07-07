@@ -26,3 +26,7 @@ Then go to `http://localhost:3000` in your browser and allow camera access when 
 ## Fun Fact
 
 The photobooth frame was hand-drawn by me! 𓁹‿𓁹
+
+## Disclaimer
+
+Fan project only — not affiliated with or endorsed by Nagano or official Chiikawa rights holders.
