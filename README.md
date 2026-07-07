@@ -2,6 +2,10 @@
 
 A cute polaroid-style photobooth featuring Chiikawa characters. Take two photos with your camera or upload your own, decorate with stickers, and save your polaroid.
 
+## Demo
+
+[chiikawa-photobooth.vercel.app](https://chiikawa-photobooth.vercel.app)
+
 ## Features
 
 - Camera mode with countdown timer and retake support
@@ -21,4 +25,4 @@ Then go to `http://localhost:3000` in your browser and allow camera access when 
 
 ## Fun Fact
 
-The photobooth frame was hand-drawn by me.
+The photobooth frame was hand-drawn by me! 𓁹‿𓁹
