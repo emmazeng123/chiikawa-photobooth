@@ -61,38 +61,76 @@ function showUploadUI() {
     const zone2 = document.getElementById("uploadZone2");
     zone1.style.display = "flex";
 
-    function makeInput(slot, onDone) {
+    function showUploadError(zone, message) {
+        zone.innerHTML = `<span style="color:#c0392b;font-size:10px;padding:8px;text-align:center;">${message}<br><span style="font-size:9px;margin-top:4px;display:block">click to try again</span></span>`;
+    }
+
+    function resetZoneLabel(zone, slotNum) {
+        zone.innerHTML = `<span>+</span><span>upload photo ${slotNum}</span>`;
+    }
+
+    function makeInput(slot, zone, slotNum, onDone) {
         const input = document.createElement("input");
         input.type = "file";
         input.accept = "image/*";
+
+        zone.addEventListener("click", () => input.click());
+
         input.addEventListener("change", (e) => {
             const file = e.target.files[0];
             if (!file) return;
+            input.value = ""; // reset so same file can be picked again
+
+            if (file.size > 15 * 1024 * 1024) {
+                showUploadError(zone, "file is too large (max 15MB). try compressing it first.");
+                return;
+            }
+
+            if (!file.type.startsWith("image/")) {
+                showUploadError(zone, "that doesn't look like an image file. try a jpg or png.");
+                return;
+            }
+
+            const objectUrl = URL.createObjectURL(file);
             const img = new Image();
+
             img.onload = () => {
+                URL.revokeObjectURL(objectUrl);
                 drawPhotoToCanvas(img, slot);
                 onDone();
             };
-            img.src = URL.createObjectURL(file);
+
+            img.onerror = () => {
+                URL.revokeObjectURL(objectUrl);
+                let reason;
+                if (file.type === "image/heic" || file.type === "image/heif") {
+                    reason = "HEIC files aren't supported by browsers. convert to jpg first.";
+                } else if (file.size < 100) {
+                    reason = "file seems empty or corrupted.";
+                } else {
+                    reason = "file may be corrupted or an unsupported format.";
+                }
+                showUploadError(zone, reason);
+            };
+
+            img.src = objectUrl;
         });
         return input;
     }
 
-    const input1 = makeInput(SLOT1, () => {
+    makeInput(SLOT1, zone1, 1, () => {
         zone1.style.display = "none";
         zone2.style.display = "flex";
         photoNumber = 1;
 
-        const input2 = makeInput(SLOT2, () => {
+        makeInput(SLOT2, zone2, 2, () => {
             zone2.style.display = "none";
             photoNumber = 2;
             next.style.display = "inline-block";
             document.getElementById("photoControls").style.display = "flex";
             ready.style.display = "none";
         });
-        zone2.addEventListener("click", () => input2.click(), { once: true });
     });
-    zone1.addEventListener("click", () => input1.click(), { once: true });
 }
 
 // take photo
