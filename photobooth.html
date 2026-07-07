@@ -6,33 +6,34 @@
     <link rel="stylesheet" href="StyleSheets/photobooth.css">
 </head>
 <body>
-    <!-- locked aspect ratio container -->
-    <div class="photobooth-container">
-        <!-- polaroid frame background -->
-        <img src="./Assets/sample.png" class="polaroid-frame">
-        
-
-        <!-- camera inside the frame -->
-        <video id="camera" class="camera" autoplay playsinline muted></video>
-        <!-- canvas for capturing -->
-        <canvas id="finalCanvas"></canvas>
-        <!-- countdown timer -->
-        <div class="countdown" id="countdown"></div>
-
-        <!-- clickable areas to upload photo (shown in upload mode) -->
-        <div class="upload-zone" id="uploadZone1" style="display:none;">
-            <span>+</span>
-            <span>upload photo 1</span>
-        </div>
-        <div class="upload-zone" id="uploadZone2" style="display:none;">
-            <span>+</span>
-            <span>upload photo 2</span>
+    <div class="booth-row">
+        <!-- sticker image buttons (left side, visible in decoration mode) -->
+        <div class="sticker-sidebar" id="stickerSidebar" style="display: none;">
+            <p class="sticker-sidebar-title">click</p>
+            <button id="addSticker1" class="sticker-btn"><img src="./Assets/sticker1.png" alt="Crying Chikawa"></button>
+            <button id="addSticker2" class="sticker-btn"><img src="./Assets/sticker2.png" alt="Fish Chikawa"></button>
+            <button id="addSticker3" class="sticker-btn"><img src="./Assets/hachi.png" alt="Hachi"></button>
+            <button id="addSticker4" class="sticker-btn"><img src="./Assets/squirrel.png" alt="Squirrel"></button>
         </div>
 
-
-        <!-- sticker canvas -->
-        <canvas id="stickerCanvas"></canvas>
+        <!-- locked aspect ratio container -->
+        <div class="photobooth-container">
+            <img src="./Assets/sample.png" class="polaroid-frame">
+            <video id="camera" class="camera" autoplay playsinline muted></video>
+            <canvas id="finalCanvas"></canvas>
+            <div class="countdown" id="countdown"></div>
+            <div class="upload-zone" id="uploadZone1" style="display:none;">
+                <span>+</span>
+                <span>upload photo 1</span>
+            </div>
+            <div class="upload-zone" id="uploadZone2" style="display:none;">
+                <span>+</span>
+                <span>upload photo 2</span>
+            </div>
+            <canvas id="stickerCanvas"></canvas>
         </div>
+    </div>
+
     <!-- photo controls -->
     <div class="controls" id="photoControls">
         <button id="ready">Take Photo</button>
@@ -41,15 +42,12 @@
     </div>
 
     <!-- sticker controls (hidden until decoration mode) -->
-    <div class="controls" id="stickerControls" style="display: none;">
-        <button id="addSticker1">Crying Chikawa</button>
-        <button id="addSticker2">Fish Chikawa</button>
-        <button id="resetStickers">Reset</button>
-        <button id="savePolaroid">Save Polaroid</button>
-    </div>
-
-    <div class="controls">
-        <button onclick="window.location.href='index.html'">Home</button>
+    <div id="stickerControls" style="display: none;">
+        <div class="controls">
+            <button id="resetStickers">Reset</button>
+            <button id="savePolaroid">Save Polaroid</button>
+            <button id="homeControls" style="display: none;" onclick="window.location.href='index.html'">Home</button>
+        </div>
     </div>
     
     <script src="JavaScript/photobooth.js"></script>

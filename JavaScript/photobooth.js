@@ -11,8 +11,6 @@ const WIDTH = 400;
 const HEIGHT = 600;
 const DPR = 2; // internal canvas resolution multiplier for better quality
 
-const HALF = HEIGHT / 2;
-
 // Photo slot positions within the 400x600 container (measured from frame PNG)
 // Multiplied by DPR for the higher-res internal canvas
 const SLOT1 = { x: 112 * DPR, y: 93 * DPR, w: 177 * DPR, h: 204 * DPR };
@@ -85,11 +83,7 @@ function showUploadUI() {
         zone.innerHTML = `<span style="color:#c0392b;font-size:10px;padding:8px;text-align:center;">${message}<br><span style="font-size:9px;margin-top:4px;display:block">click to try again</span></span>`;
     }
 
-    function resetZoneLabel(zone, slotNum) {
-        zone.innerHTML = `<span>+</span><span>upload photo ${slotNum}</span>`;
-    }
-
-    function makeInput(slot, zone, slotNum, onDone) {
+    function makeInput(slot, zone, onDone) {
         const input = document.createElement("input");
         input.type = "file";
         input.accept = "image/*";
@@ -138,12 +132,12 @@ function showUploadUI() {
         return input;
     }
 
-    makeInput(SLOT1, zone1, 1, () => {
+    makeInput(SLOT1, zone1, () => {
         zone1.style.display = "none";
         zone2.style.display = "flex";
         photoNumber = 1;
 
-        makeInput(SLOT2, zone2, 2, () => {
+        makeInput(SLOT2, zone2, () => {
             zone2.style.display = "none";
             photoNumber = 2;
             next.style.display = "inline-block";
@@ -161,16 +155,16 @@ ready.addEventListener("click", () => {
     }
 });
 
-// retake
+// retake 
 document.getElementById("retake").addEventListener("click", () => {
     const retakeSlot = photoNumber === 1 ? 0 : 1;
     const slot = retakeSlot === 0 ? SLOT1 : SLOT2;
 
-    // clear that slot on the canvas
+    // clear slot
     ctx.clearRect(slot.x, slot.y, slot.w, slot.h);
     photoNumber = retakeSlot;
 
-    // reset camera to that slot
+    // reset cam in slot
     camera.style.display = "block";
     camera.style.left = slot.x / DPR + 'px';
     camera.style.top = slot.y / DPR + 'px';
@@ -229,16 +223,12 @@ function capturePhoto() {
     ctx.drawImage(camera, sx, sy, sw, sh, 0, 0, slot.w, slot.h);
     ctx.restore();
 
-    // save photo to sessionStorage
-    const photoData = finalCanvas.toDataURL("image/png");
-    sessionStorage.setItem(`photo${photoNumber + 1}`, photoData);
-
     photoNumber++;
-    ready.disabled = false;
     document.getElementById("retake").style.display = "inline-block";
 
     if (photoNumber === 1) {
         // move camera to slot 2
+        ready.disabled = false;
         camera.style.left = SLOT2.x / DPR + 'px';
         camera.style.top = SLOT2.y / DPR + 'px';
         camera.style.width = SLOT2.w / DPR + 'px';
@@ -273,12 +263,12 @@ function drawPhotoToCanvas(img, slot) {
 // go to decoration mode
 next.addEventListener("click", () => {
     if (photoNumber === 2) {
-        camera.style.display = "none";
         next.style.display = "none";
         document.getElementById("photoControls").style.display = "none";
         document.getElementById("stickerControls").style.display = "flex";
-        stickerCanvas.style.display = "block";
-        
+        document.getElementById("stickerSidebar").style.display = "flex";
+        stickerCanvas.style.pointerEvents = "auto";
+
         // setup sticker canvas events
         stickerCanvas.addEventListener("mousedown", pointerDown);
         stickerCanvas.addEventListener("mousemove", pointerMove);
@@ -298,6 +288,14 @@ document.getElementById("addSticker1").addEventListener("click", () => {
 
 document.getElementById("addSticker2").addEventListener("click", () => {
     addSticker("./Assets/sticker2.png");
+});
+
+document.getElementById("addSticker3").addEventListener("click", () => {
+    addSticker("./Assets/hachi.png");
+});
+
+document.getElementById("addSticker4").addEventListener("click", () => {
+    addSticker("./Assets/squirrel.png");
 });
 
 function addSticker(src) {
@@ -581,5 +579,6 @@ document.getElementById("savePolaroid").addEventListener("click", () => {
         link.href = canvas.toDataURL("image/png");
         link.download = "my-polaroid.png";
         link.click();
+        document.getElementById("homeControls").style.display = "inline-block";
     }
 });
