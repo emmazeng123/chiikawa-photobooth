@@ -36,15 +36,20 @@
     <!-- photo controls -->
     <div class="controls" id="photoControls">
         <button id="ready">Take Photo</button>
+        <button id="retake" style="display: none;">Retake</button>
         <button id="next" style="display: none;">Next</button>
     </div>
-    
+
     <!-- sticker controls (hidden until decoration mode) -->
     <div class="controls" id="stickerControls" style="display: none;">
         <button id="addSticker1">Crying Chikawa</button>
         <button id="addSticker2">Fish Chikawa</button>
         <button id="resetStickers">Reset</button>
         <button id="savePolaroid">Save Polaroid</button>
+    </div>
+
+    <div class="controls">
+        <button onclick="window.location.href='index.html'">Home</button>
     </div>
     
     <script src="JavaScript/photobooth.js"></script>

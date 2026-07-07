@@ -161,6 +161,30 @@ ready.addEventListener("click", () => {
     }
 });
 
+// retake
+document.getElementById("retake").addEventListener("click", () => {
+    const retakeSlot = photoNumber === 1 ? 0 : 1;
+    const slot = retakeSlot === 0 ? SLOT1 : SLOT2;
+
+    // clear that slot on the canvas
+    ctx.clearRect(slot.x, slot.y, slot.w, slot.h);
+    photoNumber = retakeSlot;
+
+    // reset camera to that slot
+    camera.style.display = "block";
+    camera.style.left = slot.x / DPR + 'px';
+    camera.style.top = slot.y / DPR + 'px';
+    camera.style.width = slot.w / DPR + 'px';
+    camera.style.height = slot.h / DPR + 'px';
+
+    next.style.display = "none";
+    ready.style.display = "inline-block";
+    ready.disabled = true;
+    document.getElementById("retake").style.display = "none";
+
+    startCountdown(() => capturePhoto());
+});
+
 function startCountdown(callback) {
     let count = 3;
     countdown.textContent = count;
@@ -211,13 +235,14 @@ function capturePhoto() {
 
     photoNumber++;
     ready.disabled = false;
+    document.getElementById("retake").style.display = "inline-block";
 
     if (photoNumber === 1) {
         // move camera to slot 2
-        camera.style.left = SLOT2.x + 'px';
-        camera.style.top = SLOT2.y + 'px';
-        camera.style.width = SLOT2.w + 'px';
-        camera.style.height = SLOT2.h + 'px';
+        camera.style.left = SLOT2.x / DPR + 'px';
+        camera.style.top = SLOT2.y / DPR + 'px';
+        camera.style.width = SLOT2.w / DPR + 'px';
+        camera.style.height = SLOT2.h / DPR + 'px';
     } else if (photoNumber === 2) {
         camera.style.display = "none";
         ready.style.display = "none";
