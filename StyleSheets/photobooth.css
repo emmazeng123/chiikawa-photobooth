@@ -79,14 +79,16 @@ body {
     transform: translate(-50%, -50%);
     width: 60px;
     height: 60px;
-    border: 2px solid #000;
+    border: 2px solid #8b7d75;
     border-radius: 50%;
     display: none;
     align-items: center;
     justify-content: center;
     font-size: 32px;
-    font-weight: bold;
-    background: #fff;
+    font-family: "starfont", Arial, sans-serif;
+    color: #f2cccc;
+    -webkit-text-stroke: 1px #50433d;
+    background: #e9e1e1;
     z-index: 20;
 }
 

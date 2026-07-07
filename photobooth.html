@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Photobooth</title>
+    <title>photobooth</title>
     <link rel="icon" href="Assets/favicon.jpg">
     <link rel="stylesheet" href="StyleSheets/photobooth.css">
 </head>
@@ -11,16 +11,15 @@
         <!-- polaroid frame background -->
         <img src="./Assets/sample.png" class="polaroid-frame">
         
+
         <!-- camera inside the frame -->
         <video id="camera" class="camera" autoplay playsinline muted></video>
-        
         <!-- canvas for capturing -->
         <canvas id="finalCanvas"></canvas>
-        
         <!-- countdown timer -->
         <div class="countdown" id="countdown"></div>
 
-        <!-- upload zones (shown in upload mode) -->
+        <!-- clickable areas to upload photo (shown in upload mode) -->
         <div class="upload-zone" id="uploadZone1" style="display:none;">
             <span>+</span>
             <span>upload photo 1</span>
@@ -29,11 +28,11 @@
             <span>+</span>
             <span>upload photo 2</span>
         </div>
-        
+
+
         <!-- sticker canvas -->
         <canvas id="stickerCanvas"></canvas>
-    </div>
-    
+        </div>
     <!-- photo controls -->
     <div class="controls" id="photoControls">
         <button id="ready">Take Photo</button>
