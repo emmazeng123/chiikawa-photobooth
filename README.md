@@ -18,3 +18,7 @@ npx serve
 ```
 
 Then go to `http://localhost:3000` in your browser and allow camera access when prompted.
+
+## Fun Fact
+
+The photobooth frame was hand-drawn by me.
