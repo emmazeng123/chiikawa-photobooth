@@ -277,13 +277,12 @@ function redrawStickers() {
     stickers.forEach(s => {
         sCtx.drawImage(s.img, s.x, s.y, s.width, s.height);
         if (s === activeSticker) {
-            const hx = s.x + s.width - HANDLE / 2;
-            const hy = s.y + s.height - HANDLE / 2;
-            const cx = hx + HANDLE / 2;
-            const cy = hy + HANDLE / 2;
             const pad = HANDLE * 0.22;
 
-            // background circle
+            // — resize handle (bottom-right) —
+            const hx = s.x + s.width - HANDLE / 2;
+            const hy = s.y + s.height - HANDLE / 2;
+
             sCtx.fillStyle = 'white';
             sCtx.strokeStyle = '#555';
             sCtx.lineWidth = 2;
@@ -292,7 +291,6 @@ function redrawStickers() {
             sCtx.fill();
             sCtx.stroke();
 
-            // diagonal arrow ↘
             sCtx.strokeStyle = '#333';
             sCtx.lineWidth = 3;
             sCtx.lineCap = 'round';
@@ -302,13 +300,11 @@ function redrawStickers() {
             const x2 = hx + HANDLE - pad, y2 = hy + HANDLE - pad;
             const arrowSize = HANDLE * 0.22;
 
-            // shaft
             sCtx.beginPath();
             sCtx.moveTo(x1, y1);
             sCtx.lineTo(x2, y2);
             sCtx.stroke();
 
-            // arrowhead at bottom-right
             sCtx.beginPath();
             sCtx.moveTo(x2, y2);
             sCtx.lineTo(x2 - arrowSize, y2);
@@ -316,12 +312,33 @@ function redrawStickers() {
             sCtx.lineTo(x2, y2 - arrowSize);
             sCtx.stroke();
 
-            // arrowhead at top-left
             sCtx.beginPath();
             sCtx.moveTo(x1, y1);
             sCtx.lineTo(x1 + arrowSize, y1);
             sCtx.moveTo(x1, y1);
             sCtx.lineTo(x1, y1 + arrowSize);
+            sCtx.stroke();
+
+            // — delete handle (top-right) —
+            const dx = s.x + s.width - HANDLE / 2;
+            const dy = s.y - HANDLE / 2;
+
+            sCtx.fillStyle = '#e74c3c';
+            sCtx.strokeStyle = '#c0392b';
+            sCtx.lineWidth = 2;
+            sCtx.beginPath();
+            sCtx.roundRect(dx, dy, HANDLE, HANDLE, 4);
+            sCtx.fill();
+            sCtx.stroke();
+
+            const xp = HANDLE * 0.25;
+            sCtx.strokeStyle = 'white';
+            sCtx.lineWidth = 3;
+            sCtx.beginPath();
+            sCtx.moveTo(dx + xp, dy + xp);
+            sCtx.lineTo(dx + HANDLE - xp, dy + HANDLE - xp);
+            sCtx.moveTo(dx + HANDLE - xp, dy + xp);
+            sCtx.lineTo(dx + xp, dy + HANDLE - xp);
             sCtx.stroke();
         }
     });
@@ -341,8 +358,19 @@ function getPointerPos(e) {
 function pointerDown(e) {
     const { x: mouseX, y: mouseY } = getPointerPos(e);
 
-    // check resize handle on active sticker first
+    // check delete + resize handles on active sticker first
     if (activeSticker) {
+        // delete handle (top-right)
+        const dx = activeSticker.x + activeSticker.width - HANDLE / 2;
+        const dy = activeSticker.y - HANDLE / 2;
+        if (mouseX >= dx && mouseX <= dx + HANDLE && mouseY >= dy && mouseY <= dy + HANDLE) {
+            stickers.splice(stickers.indexOf(activeSticker), 1);
+            activeSticker = null;
+            redrawStickers();
+            return;
+        }
+
+        // resize handle (bottom-right)
         const hx = activeSticker.x + activeSticker.width - HANDLE / 2;
         const hy = activeSticker.y + activeSticker.height - HANDLE / 2;
         if (mouseX >= hx && mouseX <= hx + HANDLE && mouseY >= hy && mouseY <= hy + HANDLE) {
@@ -398,6 +426,14 @@ function pointerUp() {
     selectedSticker = null;
 }
 
+// reset stickers button
+document.getElementById("resetStickers").addEventListener("click", () => {
+    stickers = [];
+    activeSticker = null;
+    selectedSticker = null;
+    redrawStickers();
+});
+
 // save button
 document.getElementById("savePolaroid").addEventListener("click", () => {
     const saveCanvas = document.createElement("canvas");
@@ -414,8 +450,8 @@ document.getElementById("savePolaroid").addEventListener("click", () => {
     // 2) frame on top of photos
     const frameImg = document.querySelector(".polaroid-frame");
     const finish = () => {
-        // 3) stickers on top of frame
-        saveCtx.drawImage(stickerCanvas, 0, 0);
+        // 3) stickers on top of frame (drawn directly, no handles)
+        stickers.forEach(s => saveCtx.drawImage(s.img, s.x, s.y, s.width, s.height));
         downloadImage(saveCanvas);
     };
     if (frameImg && frameImg.complete) {
