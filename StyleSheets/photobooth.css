@@ -203,3 +203,28 @@ button:disabled {
     width: 177px;
     height: 160px;
 }
+
+@media (max-width: 500px) {
+    /* stack sidebar below the container instead of beside it */
+    .booth-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sticker-sidebar {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        order: 2;
+        margin-top: 8px;
+    }
+
+    /* scale 0.85: visual size 340x510, layout still 400x600 */
+    /* margin-bottom compensates so content below sits at the right height */
+    .photobooth-container {
+        transform: scale(0.85);
+        transform-origin: top center;
+        margin-bottom: -90px;
+    }
+}
