@@ -125,49 +125,43 @@ body {
         overflow: auto;
     }
 
-    /* scale factor: 300/500 = 0.6 */
+    .title {
+        top: 10px;
+        left: 50%;
+        font-size: 200%;
+    }
+
+    /* scale factor: 300/500 = 0.6, booth starts below title (~70px) */
     .booth {
         width: 300px;
+        top: 70px;
         left: 50%;
         transform: translateX(-50%);
     }
 
-    /* rabbit was at left:750 = 350px into booth (70%) */
-    /* mobile: booth centered, so rabbit at 50% + 70%*150px - 150px = 50% + 60px */
     .rabbit {
-        top: 210px; /* 350 * 0.6 */
+        top: 280px; /* 70 + 210 */
         left: calc(50% + 60px);
         max-width: 100px;
     }
 
     .start {
-        top: 378px; /* 630 * 0.6 */
+        top: 448px; /* 70 + 378 */
         left: 50%;
         transform: translateX(-50%);
-    }
-
-    .title {
-        left: 50%;
-        font-size: 200%;
     }
 
     .sparkle {
-        width: 40%;
-        left: 5%;
-        top: 5%;
+        width: 30%;
+        left: 2%;
+        top: 70px;
     }
 
     .geekd {
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-        bottom: 5%;
+        display: none;
     }
 
     .lockedin {
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-        bottom: 5%;
+        display: none;
     }
 }

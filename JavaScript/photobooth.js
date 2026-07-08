@@ -274,8 +274,8 @@ next.addEventListener("click", () => {
         stickerCanvas.addEventListener("mousemove", pointerMove);
         stickerCanvas.addEventListener("mouseup", pointerUp);
         stickerCanvas.addEventListener("mouseleave", pointerUp);
-        stickerCanvas.addEventListener("touchstart", pointerDown);
-        stickerCanvas.addEventListener("touchmove", pointerMove);
+        stickerCanvas.addEventListener("touchstart", pointerDown, { passive: false });
+        stickerCanvas.addEventListener("touchmove", pointerMove, { passive: false });
         stickerCanvas.addEventListener("touchend", pointerUp);
         stickerCanvas.addEventListener("touchcancel", pointerUp);
     }
@@ -435,6 +435,7 @@ function getPointerPos(e) {
 
 // drag + resize + rotate stickers
 function pointerDown(e) {
+    if (e.cancelable) e.preventDefault();
     const { x: mouseX, y: mouseY } = getPointerPos(e);
 
     // check handles on active sticker first (all in local space)
@@ -493,6 +494,7 @@ function pointerDown(e) {
 }
 
 function pointerMove(e) {
+    if (e.cancelable) e.preventDefault();
     const { x: mouseX, y: mouseY } = getPointerPos(e);
 
     if (rotating && activeSticker) {
