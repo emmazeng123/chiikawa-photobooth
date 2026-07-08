@@ -14,6 +14,7 @@ A cute polaroid-style photobooth featuring Chiikawa characters. Take two photos 
 - Upload mode for using your own photos
 - Sticker decorations — drag, resize, rotate, and delete
 - Saves as a clean PNG with no handles or UI artifacts
+- Mobile friendly
 
 ## Running Locally
 
