@@ -6,7 +6,7 @@ A cute polaroid-style photobooth featuring Chiikawa characters. Take two photos 
 
 [chiikawa-photobooth.vercel.app](https://chiikawa-photobooth.vercel.app)
 
-[![Demo](Assets/Screenshot%202026-07-07%20at%206.02.34%20PM.png)](https://github.com/emmazeng123/chiikawa-photobooth/releases/tag/v1.0.0)
+[![Demo](Assets/demo-thumbnail.png)](https://github.com/emmazeng123/chiikawa-photobooth/releases/tag/v1.0.0)
 
 ## Features
 
