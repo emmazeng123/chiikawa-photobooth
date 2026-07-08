@@ -127,8 +127,9 @@ body {
 
     .title {
         top: 10px;
-        left: 50%;
+        left: 38%;
         font-size: 200%;
+        white-space: nowrap;
     }
 
     /* scale factor: 300/500 = 0.6, booth starts below title (~70px) */
@@ -140,9 +141,9 @@ body {
     }
 
     .rabbit {
-        top: 280px; /* 70 + 210 */
-        left: calc(50% + 60px);
-        max-width: 100px;
+        top: 50px;
+        left: calc(50% + 80px);
+        max-width: 150px;
     }
 
     .start {
@@ -152,9 +153,7 @@ body {
     }
 
     .sparkle {
-        width: 30%;
-        left: 2%;
-        top: 70px;
+        display: none;
     }
 
     .geekd {
