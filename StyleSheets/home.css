@@ -6,6 +6,14 @@ html, body {
   overflow: hidden;
 }
 
+/* scene unit: 1 = one px of the original 500px-wide layout.
+   up to 1.3x, shrinks on short windows so the start button stays visible */
+:root {
+  --u: min(1.3px, calc(100vh / 740));
+  --top: calc(10 * var(--u)); /* gap below the title */
+  --x: calc(50% - 90 * var(--u)); /* scene center; nudged left since the rabbit sticks out right */
+}
+
 body {
   background: repeating-linear-gradient(
     90deg,
@@ -18,24 +26,24 @@ body {
 
 
 .booth {
-    width: 500px;
+    width: calc(500 * var(--u));
     position: absolute;
-    top: 0px;
-    left: calc(50% - 250px);
+    top: var(--top);
+    left: calc(var(--x) - 250 * var(--u));
     pointer-events: none;
 }
 
 .start {
-    width: 100px;
-    height: 50px;
+    width: calc(100 * var(--u));
+    height: calc(50 * var(--u));
     position: absolute;
-    top: 630px;
-    left: 50%;
+    top: calc(var(--top) + 630 * var(--u));
+    left: var(--x);
     color: #f2cccc;
     -webkit-text-stroke: 1.5px #50433d;
     background-color:#e9e1e1;
     border: 2px solid #8b7d75;
-    font-size: 15px;
+    font-size: calc(15 * var(--u));
     font-family: "starfont";
     border-radius: 50px;
     cursor: pointer;
@@ -56,19 +64,20 @@ body {
 }
 
 .rabbit {
+    width: calc(340 * var(--u));
     position: absolute;
-    top: 350px;
-    left: calc(50% + 100px);
+    top: calc(var(--top) + 300 * var(--u));
+    left: calc(var(--x) + 70 * var(--u));
     pointer-events: none;
 }
 
 
 .sparkle {
     /* same canvas as booth.png, so it overlays it exactly */
-    width: 500px;
+    width: calc(500 * var(--u));
     position: absolute;
-    left: calc(50% - 250px);
-    top: 0px;
+    left: calc(var(--x) - 250 * var(--u));
+    top: var(--top);
     pointer-events: none;
 }
 
@@ -80,13 +89,14 @@ body {
 
 .title {
   position: absolute;
-  top: 3%;
-  left: 48%;
+  top: 0;
+  left: calc(var(--x) + 60 * var(--u)); /* moves and scales with the booth */
   transform: translateX(-50%);
   font-family: "starfont";
-  font-size: 250%;
+  font-size: calc(40 * var(--u));
   color: #f2cccc;
-  -webkit-text-stroke: 3.5px #50433d;
+  -webkit-text-stroke: calc(3.5 * var(--u)) #50433d;
+  white-space: nowrap;
 }
 
 .title span {
@@ -107,8 +117,9 @@ body {
 
 .geekd{
     position: absolute;
-    left: calc(50% + 210px);
-    top: 320px;
+    left: calc(var(--x) + 380 * var(--u));
+    top: calc(var(--top) + 310 * var(--u));
+    font-size: calc(16 * var(--u));
 }
 
 .start:hover ~ .geekd {
@@ -118,16 +129,23 @@ body {
 .lockedin{
     display:none;
     position: absolute;
-    left: calc(50% + 210px);
-    top: 320px;
+    left: calc(var(--x) + 380 * var(--u));
+    top: calc(var(--top) + 310 * var(--u));
+    font-size: calc(16 * var(--u));
 }
 .start:hover ~ .lockedin {
     display:block;
 }
 
 @media (max-width: 600px) {
+    :root {
+        --u: 1px;
+        --x: 50%;
+    }
+
     html, body {
         overflow: auto;
+        overflow-x: hidden;
     }
 
     .title {
@@ -137,22 +155,22 @@ body {
         white-space: nowrap;
     }
 
-    /* scale factor: 300/500 = 0.6, booth starts below title (~70px) */
+    /* scale factor: 340/500 = 0.68, drawing starts just below title */
     .booth {
-        width: 300px;
-        top: 70px;
+        width: 340px;
+        top: 40px;
         left: 50%;
         transform: translateX(-50%);
     }
 
     .rabbit {
-        top: 300px;
-        left: calc(50% + 80px);
-        max-width: 150px;
+        width: 190px;
+        top: 265px;
+        left: calc(50% + 45px);
     }
 
     .start {
-        top: 448px; /* 70 + 378 */
+        top: 465px;
         left: 50%;
         transform: translateX(-50%);
     }
