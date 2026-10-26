@@ -21,7 +21,8 @@ body {
     width: 500px;
     position: absolute;
     top: 0px;
-    left: 400px;
+    left: calc(50% - 250px);
+    pointer-events: none;
 }
 
 .start {
@@ -29,7 +30,7 @@ body {
     height: 50px;
     position: absolute;
     top: 630px;
-    left: 650px;
+    left: 50%;
     color: #f2cccc;
     -webkit-text-stroke: 1.5px #50433d;
     background-color:#e9e1e1;
@@ -37,6 +38,8 @@ body {
     font-size: 15px;
     font-family: "starfont";
     border-radius: 50px;
+    cursor: pointer;
+    z-index: 10;
 }
 
 .start:hover{
@@ -55,16 +58,18 @@ body {
 .rabbit {
     position: absolute;
     top: 350px;
-    left: 750px;
+    left: calc(50% + 100px);
     pointer-events: none;
 }
 
 
 .sparkle {
-    width: 30%;
+    /* same canvas as booth.png, so it overlays it exactly */
+    width: 500px;
     position: absolute;
-    left: 26%;
-    top: 10%;
+    left: calc(50% - 250px);
+    top: 0px;
+    pointer-events: none;
 }
 
 @keyframes sparkle-animation {
@@ -102,8 +107,8 @@ body {
 
 .geekd{
     position: absolute;
-    left: 60%;
-    bottom: 50%  
+    left: calc(50% + 210px);
+    top: 320px;
 }
 
 .start:hover ~ .geekd {
@@ -113,8 +118,8 @@ body {
 .lockedin{
     display:none;
     position: absolute;
-    left: 60%;
-    bottom: 50%  
+    left: calc(50% + 210px);
+    top: 320px;
 }
 .start:hover ~ .lockedin {
     display:block;
